@@ -359,3 +359,80 @@ function showToast(message, type = 'info') {
     setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
+
+/* =================================================================
+   INTERACTIVE INTRO SPLASH MODAL LOGIC
+   ================================================================= */
+let noBtnEvadeCount = 0;
+
+// Handle Interest: YES!!
+function handleInterestYes() {
+  if (window.sounds) sounds.playTone(880, 'sine', 0.15, 0.1);
+  
+  const step1 = document.getElementById('intro-step-1');
+  const step2 = document.getElementById('intro-step-2');
+  
+  if (step1 && step2) {
+    step1.classList.remove('active');
+    setTimeout(() => {
+      step2.classList.add('active');
+      if (window.lucide) lucide.createIcons();
+    }, 200);
+  }
+}
+
+// Playful evade behavior for "Noo.. 🙈" button
+function playfulEvadeNoBtn() {
+  const noBtn = document.getElementById('btn-no-interest');
+  if (!noBtn) return;
+
+  noBtnEvadeCount++;
+  if (noBtnEvadeCount <= 4) {
+    if (window.sounds) sounds.playTone(300 + noBtnEvadeCount * 100, 'sine', 0.08, 0.04);
+    const randomX = (Math.random() - 0.5) * 160;
+    const randomY = (Math.random() - 0.5) * 80;
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+  }
+}
+
+// If user manages to tap "Noo.. 🙈"
+function handleInterestNo() {
+  if (window.sounds) sounds.playTone(220, 'triangle', 0.2, 0.1);
+  showToast('Aww! Coba klik YESS!! 🚀 😉', 'info');
+
+  const yesBtn = document.getElementById('btn-yes-interest');
+  if (yesBtn) {
+    yesBtn.style.transform = 'scale(1.15)';
+    setTimeout(() => yesBtn.style.transform = 'scale(1)', 400);
+  }
+
+  // Reset No button position after a moment
+  const noBtn = document.getElementById('btn-no-interest');
+  if (noBtn) {
+    setTimeout(() => {
+      noBtn.style.transform = 'translate(0, 0) scale(1)';
+      noBtnEvadeCount = 0;
+    }, 600);
+  }
+}
+
+// Handle Question 2 option selection ("Where did you find me?")
+function selectFindSource(sourceName) {
+  if (window.sounds) sounds.playTone(660, 'sine', 0.2, 0.08);
+
+  showToast(`Terima kasih! (Ditemukan via: ${sourceName})`, 'success');
+  closeIntroModal();
+}
+
+// Skip & Close Intro Overlay
+function skipIntroModal() {
+  if (window.sounds) sounds.playClick();
+  closeIntroModal();
+}
+
+function closeIntroModal() {
+  const overlay = document.getElementById('intro-modal-overlay');
+  if (overlay) {
+    overlay.classList.add('fade-out');
+  }
+}

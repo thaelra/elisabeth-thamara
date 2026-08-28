@@ -25,6 +25,54 @@
 </head>
 <body data-theme="light">
 
+  <!-- INTERACTIVE SPLASH INTRO MODAL -->
+  <div id="intro-modal-overlay" class="intro-overlay-backdrop">
+    <div class="intro-folder-card">
+      <div class="folder-header-bar">
+        <div class="window-dots">
+          <span class="dot dot-red" onclick="skipIntroModal()" style="cursor: pointer;" title="Skip"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="folder-title-tag">WELCOME_INTRO_QUESTION.FIG</div>
+        <button onclick="skipIntroModal()" class="intro-skip-btn">Skip <i data-lucide="arrow-right"></i></button>
+      </div>
+
+      <div class="intro-body-content">
+        <!-- STEP 1: Are you interested in me? -->
+        <div id="intro-step-1" class="intro-step-panel active">
+          <div class="intro-emoji-badge">✨ 👋</div>
+          <h2 class="intro-question-title">Hi there! Are you interested in me?</h2>
+          <p class="intro-question-desc">Sebelum menjelajahi Portofolio Kreatif ini, pilih jawabanmu ya!</p>
+
+          <div class="intro-btn-group">
+            <button id="btn-yes-interest" class="btn-primary intro-action-btn" onclick="handleInterestYes()">
+              <span>YESS!! 🚀</span>
+            </button>
+            <button id="btn-no-interest" class="btn-secondary intro-action-btn" onmouseover="playfulEvadeNoBtn()" onclick="handleInterestNo()">
+              <span>Noo.. 🙈</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Where did you find me? -->
+        <div id="intro-step-2" class="intro-step-panel">
+          <div class="intro-emoji-badge">🎉 🔍</div>
+          <h2 class="intro-question-title">Awesome! Where did you find me?</h2>
+          <p class="intro-question-desc">Dari mana kamu menemukan / tahu tentang portofolio saya?</p>
+
+          <div class="intro-options-grid">
+            <button class="intro-option-pill" onclick="selectFindSource('LinkedIn')"><i data-lucide="linkedin"></i> LinkedIn</button>
+            <button class="intro-option-pill" onclick="selectFindSource('GitHub')"><i data-lucide="github"></i> GitHub</button>
+            <button class="intro-option-pill" onclick="selectFindSource('Instagram')"><i data-lucide="instagram"></i> Instagram</button>
+            <button class="intro-option-pill" onclick="selectFindSource('Teman / Kampus')"><i data-lucide="users"></i> Teman / Kampus</button>
+            <button class="intro-option-pill" onclick="selectFindSource('Google Search / Web')"><i data-lucide="search"></i> Google / Web Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 3D Three.js Interactive Canvas Container -->
   <div id="three-canvas-container"></div>
 
