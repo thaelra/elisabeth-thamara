@@ -243,16 +243,22 @@ function onScrollMove() {
 
 function onWindowResize() {
   const container = document.getElementById('three-canvas-container');
-  if (!container || !renderer || !camera) return;
+  if (!container || !renderer || !camera || !folderGroup) return;
 
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(container.clientWidth, container.clientHeight);
 
-  // Responsive adjusting position on small screens
-  if (window.innerWidth < 768) {
-    folderGroup.position.set(0, -1.8, -2);
-    folderGroup.scale.set(0.7, 0.7, 0.7);
+  const w = window.innerWidth;
+  if (w <= 640) {
+    folderGroup.position.set(0, -1.2, -1.5);
+    folderGroup.scale.set(0.6, 0.6, 0.6);
+  } else if (w <= 1024) {
+    folderGroup.position.set(2.0, 0, -0.5);
+    folderGroup.scale.set(0.8, 0.8, 0.8);
+  } else if (w >= 1440) {
+    folderGroup.position.set(4.0, 0.3, 0.5);
+    folderGroup.scale.set(1.15, 1.15, 1.15);
   } else {
     folderGroup.position.set(3.2, 0.2, 0);
     folderGroup.scale.set(1, 1, 1);

@@ -1,6 +1,6 @@
 /* =================================================================
    CREATIVE FOLDER 3D PORTOFOLIO DESIGN SYSTEM
-   Inspired by physical folder tabs & ultra modern 3D interactive web
+   Ultra Responsive Multi-Screen Adaptability (Mobile, Tablet, Desktop, Ultra-Wide)
    ================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -49,7 +49,7 @@
   --shadow-folder: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Base Styles */
+/* Base Reset & Fluid Typography */
 * {
   margin: 0;
   padding: 0;
@@ -59,6 +59,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -79,7 +80,7 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: radial-gradient(rgba(29, 112, 184, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(29, 112, 184, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: -1;
@@ -100,23 +101,23 @@ body::before {
 .app-container {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
 }
 
 /* =================================================================
-   TOP BAR & NAVIGATION SYSTEM
+   TOP BAR & NAVIGATION SYSTEM (Desktop & Adaptive Mobile)
    ================================================================= */
 .top-nav {
   position: sticky;
-  top: 1.25rem;
+  top: 1rem;
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-light);
@@ -127,10 +128,9 @@ body::before {
 }
 
 [data-theme="dark"] .top-nav {
-  background: rgba(20, 28, 40, 0.8);
+  background: rgba(20, 28, 40, 0.85);
 }
 
-/* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
@@ -163,22 +163,23 @@ body::before {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   list-style: none;
 }
 
 .nav-tab {
   position: relative;
-  padding: 0.5rem 1.1rem;
+  padding: 0.5rem 1rem;
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   border-radius: 12px;
   transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  white-space: nowrap;
 }
 
 .nav-tab:hover,
@@ -189,11 +190,10 @@ body::before {
   transform: translateY(-2px);
 }
 
-/* Nav Utility Actions */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .icon-btn {
@@ -216,14 +216,59 @@ body::before {
   transform: scale(1.05);
 }
 
+/* Mobile Bottom Navigation Dock (Appears on Mobile Screen <= 768px) */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-light);
+  padding: 0.4rem 0.6rem;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 2rem);
+  max-width: 420px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+[data-theme="dark"] .mobile-bottom-nav {
+  background: rgba(20, 28, 40, 0.92);
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.4rem 0.7rem;
+  border-radius: 20px;
+  transition: all var(--transition-fast);
+}
+
+.mobile-nav-item.active,
+.mobile-nav-item:hover {
+  color: white;
+  background: var(--bg-folder-tab);
+}
+
 /* =================================================================
-   HERO FOLDER SECTION (3D Creative Presentation)
+   HERO FOLDER SECTION (Adaptive Multi-Screen Layout)
    ================================================================= */
 .hero-section {
   min-height: 85vh;
   display: flex;
   align-items: center;
-  padding: 3rem 0;
+  padding: 2.5rem 0;
   position: relative;
 }
 
@@ -267,26 +312,29 @@ body::before {
 
 .folder-title-tag {
   font-family: var(--font-code);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Hero Content Grid */
+/* Hero Content Grid (Fluid responsive ratio) */
 .hero-content {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 2.5rem;
-  padding: 3.5rem 3rem;
+  padding: clamp(1.75rem, 4vw, 3.5rem);
   align-items: center;
 }
 
 .hero-text-area {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.2rem;
 }
 
 .hero-edition-badge {
@@ -320,7 +368,7 @@ body::before {
 }
 
 .hero-main-title {
-  font-size: 4rem;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -330,7 +378,7 @@ body::before {
 }
 
 .hero-name-subtitle {
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
   font-weight: 700;
   color: var(--bg-folder-tab);
   display: flex;
@@ -339,41 +387,40 @@ body::before {
 }
 
 .hero-tagline {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
   color: var(--text-muted);
-  max-width: 540px;
+  max-width: 560px;
 }
 
-/* Quick Skills Pills in Hero */
 .hero-skill-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
 }
 
 .pill-item {
-  padding: 0.4rem 0.9rem;
+  padding: 0.4rem 0.85rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
 
-/* Hero CTA Buttons */
 .hero-cta-group {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 0.85rem;
+  margin-top: 0.8rem;
 }
 
 .btn-primary {
-  padding: 0.85rem 1.8rem;
+  padding: 0.85rem 1.6rem;
   background: linear-gradient(135deg, var(--bg-folder-tab), var(--bg-folder-dark));
   color: white;
   text-decoration: none;
@@ -383,6 +430,7 @@ body::before {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   box-shadow: 0 6px 20px rgba(29, 112, 184, 0.35);
   transition: all var(--transition-bounce);
@@ -394,7 +442,7 @@ body::before {
 }
 
 .btn-secondary {
-  padding: 0.85rem 1.6rem;
+  padding: 0.85rem 1.5rem;
   background: transparent;
   color: var(--text-main);
   border: 2px solid var(--border-light);
@@ -404,6 +452,7 @@ body::before {
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   transition: all var(--transition-fast);
 }
@@ -419,7 +468,7 @@ body::before {
   position: relative;
   background: linear-gradient(145deg, #1D70B8, #0A4B82);
   border-radius: 20px;
-  padding: 1.75rem;
+  padding: 1.5rem;
   color: white;
   box-shadow: 0 15px 35px rgba(10, 75, 130, 0.3);
   transform-style: preserve-3d;
@@ -432,7 +481,7 @@ body::before {
   aspect-ratio: 4/3;
   border-radius: 14px;
   overflow: hidden;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -465,7 +514,7 @@ body::before {
    SECTION HEADERS & FOLDER TABS
    ================================================================= */
 .section-wrapper {
-  padding: 4.5rem 0;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
 }
 
 .folder-tab-header {
@@ -476,11 +525,11 @@ body::before {
 }
 
 .tab-title-notch {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.8rem;
   background: var(--bg-folder-tab);
   color: white;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   display: inline-flex;
@@ -493,7 +542,7 @@ body::before {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: 0 24px 24px 24px;
-  padding: 3rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
   box-shadow: var(--shadow-folder);
 }
 
@@ -505,13 +554,13 @@ body::before {
   font-family: var(--font-code);
   color: var(--bg-folder-tab);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .section-main-title {
-  font-size: 2.25rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-top: 0.2rem;
@@ -523,7 +572,7 @@ body::before {
 .profile-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 3rem;
+  gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
 }
 
@@ -533,6 +582,9 @@ body::before {
   overflow: hidden;
   border: 3px solid var(--bg-folder-tab);
   box-shadow: var(--shadow-lg);
+  max-width: 440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .profile-avatar-frame img {
@@ -548,23 +600,22 @@ body::before {
 }
 
 .bio-paragraph {
-  font-size: 1.08rem;
+  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
   color: var(--text-muted);
   line-height: 1.7;
 }
 
-/* Stats Counter Grid */
 .stats-counter-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .stat-item-box {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
-  padding: 1.25rem 1rem;
+  padding: 1.1rem 0.85rem;
   border-radius: 16px;
   text-align: center;
   transition: transform var(--transition-fast);
@@ -577,13 +628,13 @@ body::before {
 
 .stat-number {
   font-family: var(--font-code);
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 800;
   color: var(--bg-folder-tab);
 }
 
 .stat-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
   margin-top: 0.2rem;
@@ -595,14 +646,14 @@ body::before {
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .expertise-card {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  padding: 2rem;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
   transition: all var(--transition-smooth);
   position: relative;
   overflow: hidden;
@@ -615,32 +666,31 @@ body::before {
 }
 
 .expertise-icon-wrapper {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   background: var(--bg-folder-tab);
   color: white;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
 }
 
 .expertise-title {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .expertise-desc {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 
-/* Progress Meter Bars */
 .skill-bar-item {
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .skill-bar-info {
@@ -648,7 +698,7 @@ body::before {
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
 .progress-track {
@@ -681,7 +731,7 @@ body::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 28px;
+  left: 26px;
   width: 3px;
   height: 100%;
   background: var(--border-light);
@@ -689,13 +739,13 @@ body::before {
 
 .timeline-item {
   display: flex;
-  gap: 1.75rem;
+  gap: 1.5rem;
   position: relative;
 }
 
 .timeline-node {
-  width: 58px;
-  height: 58px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background: var(--bg-card);
   border: 3px solid var(--bg-folder-tab);
@@ -713,7 +763,7 @@ body::before {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 18px;
-  padding: 1.75rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
   transition: transform var(--transition-fast);
 }
 
@@ -724,19 +774,19 @@ body::before {
 
 .timeline-year {
   font-family: var(--font-code);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--bg-folder-tab);
 }
 
 .timeline-role {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   font-weight: 700;
   margin: 0.2rem 0;
 }
 
 .timeline-org {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 0.75rem;
@@ -748,19 +798,27 @@ body::before {
 .portfolio-filter-tabs {
   display: flex;
   gap: 0.6rem;
-  margin-bottom: 2.25rem;
-  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+}
+
+.portfolio-filter-tabs::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .filter-btn {
-  padding: 0.6rem 1.4rem;
+  padding: 0.6rem 1.3rem;
   border-radius: 30px;
   border: 1.5px solid var(--border-light);
   background: var(--bg-main);
   color: var(--text-muted);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   cursor: pointer;
+  white-space: nowrap;
   transition: all var(--transition-fast);
 }
 
@@ -775,7 +833,7 @@ body::before {
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1.75rem;
 }
 
 .project-card {
@@ -817,7 +875,7 @@ body::before {
   top: 12px;
   left: 12px;
   padding: 0.35rem 0.8rem;
-  background: rgba(10, 75, 130, 0.85);
+  background: rgba(10, 75, 130, 0.88);
   backdrop-filter: blur(8px);
   color: white;
   border-radius: 20px;
@@ -826,22 +884,22 @@ body::before {
 }
 
 .project-card-body {
-  padding: 1.5rem;
+  padding: 1.35rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .project-card-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 0.4rem;
 }
 
 .project-card-desc {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
   flex-grow: 1;
 }
 
@@ -849,11 +907,11 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
 }
 
 .tech-tag {
-  padding: 0.25rem 0.65rem;
+  padding: 0.25rem 0.6rem;
   background: rgba(29, 112, 184, 0.1);
   color: var(--bg-folder-tab);
   font-size: 0.75rem;
@@ -866,14 +924,14 @@ body::before {
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--border-light);
-  padding-top: 1rem;
+  padding-top: 0.9rem;
 }
 
 .btn-text-link {
   color: var(--bg-folder-tab);
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -894,16 +952,16 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(13, 17, 23, 0.75);
+  background: rgba(13, 17, 23, 0.78);
   backdrop-filter: blur(12px);
-  z-index: 1000;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-fast);
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .modal-overlay.active {
@@ -913,10 +971,11 @@ body::before {
 
 .modal-folder-box {
   width: 100%;
-  max-width: 800px;
+  max-width: 820px;
+  max-height: 90vh;
+  overflow-y: auto;
   background: var(--bg-card);
   border-radius: 24px;
-  overflow: hidden;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-folder);
   transform: scale(0.9);
@@ -928,15 +987,15 @@ body::before {
 }
 
 .modal-body-content {
-  padding: 2.5rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 .modal-project-img {
   width: 100%;
-  max-height: 380px;
+  max-height: 360px;
   object-fit: cover;
   border-radius: 16px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 /* =================================================================
@@ -945,30 +1004,30 @@ body::before {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: clamp(1.5rem, 4vw, 3rem);
 }
 
 .contact-form-box {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.1rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .form-label {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 0.85rem 1.1rem;
+  padding: 0.8rem 1rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 12px;
@@ -988,45 +1047,46 @@ body::before {
 .contact-info-box {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .info-item-card {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1.25rem;
+  gap: 1.1rem;
+  padding: 1.1rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 16px;
 }
 
 .info-icon {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   background: var(--bg-folder-tab);
   color: white;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .site-footer {
-  margin-top: 4rem;
-  padding: 2.5rem 0;
+  margin-top: 3.5rem;
+  padding: 2rem 0 5rem 0;
   border-top: 1px solid var(--border-light);
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 /* =================================================================
-   ANIMATION & RESPONSIVE UTILITIES
+   ANIMATION & RESPONSIVE BREAKPOINT RULES
    ================================================================= */
 .animate-scroll {
   opacity: 0;
-  transform: translateY(35px);
+  transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1035,39 +1095,157 @@ body::before {
   transform: translateY(0);
 }
 
-/* Responsive Media Queries */
+/* -----------------------------------------------------------------
+   BREAKPOINT 1: ULTRA WIDE SCREENS (>= 1440px)
+   ----------------------------------------------------------------- */
+@media (min-width: 1440px) {
+  .app-container {
+    max-width: 1400px;
+  }
+  .portfolio-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* -----------------------------------------------------------------
+   BREAKPOINT 2: LAPTOP & TABLET LANDSCAPE (1024px - 1439px)
+   ----------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .expertise-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
-  .hero-content,
-  .profile-grid,
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profile-avatar-frame {
+    margin: 0 auto 1rem auto;
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
   }
 
-  .portfolio-grid,
   .expertise-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* -----------------------------------------------------------------
+   BREAKPOINT 3: TABLET PORTRAIT (768px - 1023px)
+   ----------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Activate Mobile Navigation Dock */
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .top-nav {
+    padding: 0.6rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .nav-links {
+    display: none; /* Hide top desktop tabs, rely on mobile dock */
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding: 1.5rem 0;
   }
 
   .stats-counter-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .experience-timeline::before {
+    left: 18px;
+  }
+
+  .timeline-node {
+    width: 42px;
+    height: 42px;
+  }
+
+  .timeline-item {
+    gap: 1rem;
+  }
+
+  .site-footer {
+    padding-bottom: 6rem; /* Extra space for mobile bottom dock */
+  }
 }
 
+/* -----------------------------------------------------------------
+   BREAKPOINT 4: MOBILE PHONES (<= 640px)
+   ----------------------------------------------------------------- */
 @media (max-width: 640px) {
-  .hero-main-title {
-    font-size: 2.6rem;
+  .hero-content {
+    padding: 1.5rem 1.1rem;
   }
 
-  .nav-links {
-    display: none;
+  .section-body-card {
+    border-radius: 0 18px 18px 18px;
+    padding: 1.25rem;
   }
 
-  .portfolio-grid,
+  .tab-title-notch {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
   .expertise-grid {
     grid-template-columns: 1fr;
   }
 
-  .section-body-card {
-    padding: 1.75rem;
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100%;
+  }
+
+  .hero-skill-pills {
+    justify-content: flex-start;
+  }
+
+  .modal-folder-box {
+    border-radius: 18px;
+  }
+
+  .modal-body-content {
+    padding: 1.1rem;
+  }
+
+  .modal-body-content div[style*="display: flex"] {
+    flex-direction: column;
+  }
+
+  .modal-body-content .btn-primary,
+  .modal-body-content .btn-secondary {
+    width: 100%;
   }
 }

@@ -236,21 +236,29 @@ function initTiltCard() {
   });
 }
 
-// Observe Scroll for Active Navigation Links
+// Observe Scroll for Active Navigation Links (Desktop & Mobile)
 function initNavActiveTabObserver() {
   const sections = document.querySelectorAll('section[id]');
-  const navTabs = document.querySelectorAll('.nav-tab');
+  const desktopTabs = document.querySelectorAll('.nav-tab');
+  const mobileTabs = document.querySelectorAll('.mobile-nav-item');
 
   window.addEventListener('scroll', () => {
-    let current = '';
+    let current = 'hero';
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
+      const sectionTop = section.offsetTop - 150;
       if (window.scrollY >= sectionTop) {
         current = section.getAttribute('id');
       }
     });
 
-    navTabs.forEach(tab => {
+    desktopTabs.forEach(tab => {
+      tab.classList.remove('active');
+      if (tab.getAttribute('href') === `#${current}`) {
+        tab.classList.add('active');
+      }
+    });
+
+    mobileTabs.forEach(tab => {
       tab.classList.remove('active');
       if (tab.getAttribute('href') === `#${current}`) {
         tab.classList.add('active');
