@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio - Elisabeth Thamara | Creative 3D Portfolio</title>
+  <meta name="description" content="Portofolio interaktif 3D kreatif Elisabeth Thamara - Computer Science, Web Development, UI/UX Design, dan Video Editing.">
+  <meta name="keywords" content="Portfolio, Web Development, UI/UX Design, Video Editing, Elisabeth Thamara, Computer Science, 3D Portfolio">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D70B8'><path d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z'/></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js CDN for 3D WebGL Canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- GSAP & ScrollTrigger for Super Smooth Scroll Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- 3D Three.js Interactive Canvas Container -->
+  <div id="three-canvas-container"></div>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999;"></div>
+
+  <div class="app-container">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="top-nav">
+      <a href="#hero" class="brand-logo" onclick="sounds.playClick()">
+        <div class="logo-folder-icon">
+          <i data-lucide="folder-git-2"></i>
+        </div>
+        <span>Portofolio<span style="color: var(--bg-folder-tab)">.</span></span>
+      </a>
+
+      <!-- Folder Tab Menu -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#profile" class="nav-tab active" onclick="sounds.playTabFlip()"><i data-lucide="user"></i> Profil</a></li>
+          <li><a href="#expertise" class="nav-tab" onclick="sounds.playTabFlip()"><i data-lucide="cpu"></i> Keahlian</a></li>
+          <li><a href="#experience" class="nav-tab" onclick="sounds.playTabFlip()"><i data-lucide="briefcase"></i> Pengalaman</a></li>
+          <li><a href="#portfolio" class="nav-tab" onclick="sounds.playTabFlip()"><i data-lucide="layout-grid"></i> Karya</a></li>
+          <li><a href="#contact" class="nav-tab" onclick="sounds.playTabFlip()"><i data-lucide="mail"></i> Kontak</a></li>
+        </ul>
+      </nav>
+
+      <!-- Utility Control Buttons -->
+      <div class="nav-actions">
+        <button id="audio-toggle-btn" class="icon-btn" title="Toggle Sound FX" onclick="toggleAudioSystem()">
+          <i data-lucide="volume-2" id="audio-icon"></i>
+        </button>
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Theme" onclick="toggleThemeSystem()">
+          <i data-lucide="moon" id="theme-icon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- HERO SECTION (3D Creative Presentation) -->
+    <section id="hero" class="hero-section">
+      <div class="hero-folder-wrapper animate-scroll">
+        <!-- MacOS Style Header -->
+        <div class="folder-header-bar">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="folder-title-tag">CREATIVE_PORTOFOLIO_FOLDER_2026.FIG</div>
+          <div style="width: 50px;"></div>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-text-area">
+            <div class="hero-edition-badge">
+              <span class="pulse-dot"></span>
+              <span id="hero-edition-text">2026 Edition</span>
+            </div>
+
+            <h1 class="hero-main-title">Portofolio</h1>
+            <div class="hero-name-subtitle" id="hero-name">
+              Elisabeth Thamara
+            </div>
+
+            <p class="hero-tagline" id="hero-tagline">
+              CREATING IMPACT THROUGH DESIGN, TECHNOLOGY, AND CREATIVITY
+            </p>
+
+            <!-- Quick Skill Badges -->
+            <div class="hero-skill-pills">
+              <span class="pill-item"><i data-lucide="palette"></i> UI/UX & Figma</span>
+              <span class="pill-item"><i data-lucide="code-2"></i> Web Development</span>
+              <span class="pill-item"><i data-lucide="video"></i> Video Editing</span>
+              <span class="pill-item"><i data-lucide="sparkles"></i> Motion Graphics</span>
+            </div>
+
+            <!-- CTA Action Buttons -->
+            <div class="hero-cta-group">
+              <a href="#portfolio" class="btn-primary" onclick="sounds.playClick()">
+                <i data-lucide="folder-open"></i> Lihat Karya Portofolio
+              </a>
+              <a href="#contact" class="btn-secondary" onclick="sounds.playClick()">
+                <i data-lucide="send"></i> Hubungi Saya
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Interactive Card Preview (Right Side) -->
+          <div class="hero-interactive-card" id="hero-tilt-card">
+            <div class="card-avatar-wrapper">
+              <img src="assets/avatar.jpg" alt="Elisabeth Thamara Avatar" class="card-avatar-img" id="hero-avatar-img">
+              <div class="card-camera-badge">
+                <i data-lucide="camera" style="width: 18px; height: 18px; color: white;"></i>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="font-size: 1.2rem; font-weight: 800;" id="hero-card-name">Hi! I'm Elisabeth</h3>
+                <p style="font-size: 0.85rem; opacity: 0.9;" id="hero-card-role">Computer Science Student</p>
+              </div>
+              <a href="#profile" class="btn-primary" style="padding: 0.5rem 0.9rem; font-size: 0.8rem;" onclick="sounds.playClick()">
+                About Me <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY PROFILE / INTRODUCTION SECTION -->
+    <section id="profile" class="section-wrapper">
+      <div class="folder-tab-header">
+        <div class="tab-title-notch">
+          <i data-lucide="user-check"></i> INTRODUCTION
+        </div>
+      </div>
+
+      <div class="section-body-card animate-scroll">
+        <div class="section-heading-group">
+          <span class="section-subtitle">// MY PROFILE</span>
+          <h2 class="section-main-title">Tentang Saya & Passion</h2>
+        </div>
+
+        <div class="profile-grid">
+          <div class="profile-avatar-frame">
+            <img src="assets/avatar.jpg" alt="Elisabeth Thamara Profile Photo" id="profile-bio-img">
+          </div>
+
+          <div class="profile-bio-box">
+            <p class="bio-paragraph" id="profile-bio-text">
+              Saya seorang mahasiswi Computer Science yang berdedikasi menciptakan karya digital berdampak melalui kombinasi pemrograman web modern, desain UI/UX yang intuitif, dan penyuntingan video yang sinematik.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+              <div class="pill-item"><i data-lucide="map-pin"></i> <span id="profile-location">Jakarta, Indonesia</span></div>
+              <div class="pill-item"><i data-lucide="graduation-cap"></i> <span>Computer Science</span></div>
+              <div class="pill-item"><i data-lucide="briefcase"></i> <span id="profile-status">Available for Project</span></div>
+              <div class="pill-item"><i data-lucide="languages"></i> <span>Indonesia & English</span></div>
+            </div>
+
+            <!-- Stats Counters -->
+            <div class="stats-counter-grid" id="stats-counter-container">
+              <!-- Rendered dynamically from portfolioData.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY EXPERTISE (SKILLS) SECTION -->
+    <section id="expertise" class="section-wrapper">
+      <div class="folder-tab-header">
+        <div class="tab-title-notch">
+          <i data-lucide="cpu"></i> MY EXPERTISE
+        </div>
+      </div>
+
+      <div class="section-body-card animate-scroll">
+        <div class="section-heading-group">
+          <span class="section-subtitle">// SKILLS & CAPABILITIES</span>
+          <h2 class="section-main-title">Bidang Keahlian Utama</h2>
+        </div>
+
+        <div class="expertise-grid" id="expertise-container">
+          <!-- Dynamically generated from portfolioData.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- MY EXPERIENCE TIMELINE -->
+    <section id="experience" class="section-wrapper">
+      <div class="folder-tab-header">
+        <div class="tab-title-notch">
+          <i data-lucide="briefcase"></i> MY EXPERIENCE
+        </div>
+      </div>
+
+      <div class="section-body-card animate-scroll">
+        <div class="section-heading-group">
+          <span class="section-subtitle">// JOURNEY & ORGANIZATIONS</span>
+          <h2 class="section-main-title">Pengalaman & Rekam Jejak</h2>
+        </div>
+
+        <div class="experience-timeline" id="experience-container">
+          <!-- Dynamically generated from portfolioData.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO SHOWCASE (Field Specific & Filterable) -->
+    <section id="portfolio" class="section-wrapper">
+      <div class="folder-tab-header">
+        <div class="tab-title-notch">
+          <i data-lucide="folder-open"></i> PORTFOLIO WORKS
+        </div>
+      </div>
+
+      <div class="section-body-card animate-scroll">
+        <div class="section-heading-group">
+          <span class="section-subtitle">// FEATURED PROJECTS</span>
+          <h2 class="section-main-title">Galeri Karya Berdasarkan Bidang</h2>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="portfolio-filter-tabs">
+          <button class="filter-btn active" data-filter="all" onclick="filterPortfolio('all', this)">Semua Karya</button>
+          <button class="filter-btn" data-filter="web" onclick="filterPortfolio('web', this)">Web Development</button>
+          <button class="filter-btn" data-filter="design" onclick="filterPortfolio('design', this)">UI/UX Design</button>
+          <button class="filter-btn" data-filter="video" onclick="filterPortfolio('video', this)">Video Editing</button>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="portfolio-grid" id="portfolio-grid-container">
+          <!-- Rendered dynamically from portfolioData.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & FOOTER SECTION -->
+    <section id="contact" class="section-wrapper">
+      <div class="folder-tab-header">
+        <div class="tab-title-notch">
+          <i data-lucide="mail"></i> GET IN TOUCH
+        </div>
+      </div>
+
+      <div class="section-body-card animate-scroll">
+        <div class="section-heading-group">
+          <span class="section-subtitle">// CONTACT & COLLABORATION</span>
+          <h2 class="section-main-title">Mari Bekerja Sama!</h2>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Form -->
+          <form class="contact-form-box" id="contact-form" onsubmit="handleContactSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Nama Anda</label>
+              <input type="text" class="form-input" placeholder="Masukkan nama..." required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Anda</label>
+              <input type="email" class="form-input" placeholder="email@domain.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pesan / Project Inquiry</label>
+              <textarea class="form-textarea" rows="4" placeholder="Tuliskan detail ide atau pertanyaan Anda..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="margin-top: 0.5rem;">
+              <i data-lucide="send"></i> Kirim Pesan
+            </button>
+          </form>
+
+          <!-- Contact Information & Links -->
+          <div class="contact-info-box">
+            <div class="info-item-card">
+              <div class="info-icon"><i data-lucide="mail"></i></div>
+              <div style="flex-grow: 1;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">EMAIL CONTACT</div>
+                <div style="font-weight: 700;" id="contact-email-text">elisabeth.thamara@example.com</div>
+              </div>
+              <button class="icon-btn" title="Copy Email" onclick="copyEmailToClipboard()">
+                <i data-lucide="copy"></i>
+              </button>
+            </div>
+
+            <div class="info-item-card">
+              <div class="info-icon" style="background: var(--accent-orange);"><i data-lucide="file-text"></i></div>
+              <div style="flex-grow: 1;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">RESUME / CV</div>
+                <div style="font-weight: 700;">Curriculum Vitae 2026</div>
+              </div>
+              <a href="#" class="btn-primary" style="padding: 0.5rem 0.9rem; font-size: 0.85rem;" onclick="showToast('Memunduh CV Dummy...', 'info'); return false;">
+                <i data-lucide="download"></i> Download
+              </a>
+            </div>
+
+            <!-- Social Links -->
+            <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+              <a href="https://github.com" target="_blank" class="icon-btn" title="GitHub" onclick="sounds.playClick()"><i data-lucide="github"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="icon-btn" title="LinkedIn" onclick="sounds.playClick()"><i data-lucide="linkedin"></i></a>
+              <a href="https://instagram.com" target="_blank" class="icon-btn" title="Instagram" onclick="sounds.playClick()"><i data-lucide="instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <p>&copy; 2026 <strong id="footer-name">Elisabeth Thamara</strong>. Built with 3D Interactive WebGL, HTML5, CSS3 & JavaScript.</p>
+      <p style="font-size: 0.8rem; margin-top: 0.4rem; color: var(--text-muted);">Ready for <strong>GitHub Pages</strong> Deployment</p>
+    </footer>
+
+  </div>
+
+  <!-- PROJECT DETAIL MODAL WINDOW -->
+  <div id="project-modal" class="modal-overlay">
+    <div class="modal-folder-box">
+      <div class="folder-header-bar">
+        <div class="window-dots">
+          <span class="dot dot-red" onclick="closeProjectModal()" style="cursor: pointer;"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="folder-title-tag" id="modal-project-badge">PROJECT_DETAILS.FIG</div>
+        <button onclick="closeProjectModal()" style="background: none; border: none; cursor: pointer; color: var(--text-muted);">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body-content">
+        <img src="" id="modal-project-img" class="modal-project-img" alt="Project Preview">
+        <h2 id="modal-project-title" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;"></h2>
+        <div id="modal-project-tags" class="project-tech-tags" style="margin-bottom: 1rem;"></div>
+        <p id="modal-project-desc" style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem;"></p>
+
+        <div style="display: flex; gap: 1rem;">
+          <a href="#" id="modal-demo-link" target="_blank" class="btn-primary"><i data-lucide="external-link"></i> Live Demo</a>
+          <a href="#" id="modal-github-link" target="_blank" class="btn-secondary"><i data-lucide="github"></i> Repository</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript Modules -->
+  <script src="js/portfolioData.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/threeScene.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
