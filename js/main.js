@@ -435,4 +435,11 @@ function closeIntroModal() {
   if (overlay) {
     overlay.classList.add('fade-out');
   }
+  document.body.classList.add('intro-completed');
+  if (typeof onWindowResize === 'function') {
+    onWindowResize();
+  }
+  if (typeof initScrollAnimations === 'function') {
+    initScrollAnimations();
+  }
 }
