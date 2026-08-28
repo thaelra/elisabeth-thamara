@@ -1,6 +1,6 @@
 /* =================================================================
    CREATIVE FOLDER 3D PORTOFOLIO DESIGN SYSTEM
-   Ultra Responsive & Locked Mobile Layout (iPhone 13 / iOS Safari / All Devices)
+   Universal Ultra-Locked Responsive Engine (All Android Devices, iPhones, Tablets, Desktops)
    ================================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -28,7 +28,7 @@
   --shadow-folder: 0 12px 35px rgba(13, 17, 23, 0.15);
 
   /* Fonts */
-  --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-code: 'Space Grotesk', monospace;
 
   /* Transitions */
@@ -49,23 +49,29 @@
   --shadow-folder: 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Base Reset & Strictly Locked Mobile Widths */
-* {
+/* =================================================================
+   BULLETPROOF UNIVERSAL RESET & SCREEN LOCKING
+   ================================================================= */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   max-width: 100%;
+  min-width: 0; /* Prevents flex/grid children overflow on Android & iOS */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 html, body {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: hidden !important;
   position: relative;
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
+  touch-action: pan-y; /* Allows vertical scrolling, locks horizontal sway */
 }
 
 body {
@@ -76,6 +82,12 @@ body {
   transition: background-color var(--transition-smooth), color var(--transition-smooth);
 }
 
+img, svg, canvas, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* Background Noise Texture */
 body::before {
   content: '';
@@ -83,21 +95,22 @@ body::before {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-image: radial-gradient(rgba(29, 112, 184, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: -1;
 }
 
-/* Three.js 3D Background Container (Locked Bounds) */
+/* Three.js 3D Background Canvas (Locked Bounds) */
 #three-canvas-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  max-width: 100%;
+  height: 100dvh;
+  max-width: 100vw;
+  max-height: 100dvh;
   overflow: hidden;
   z-index: 0;
   pointer-events: none;
@@ -119,18 +132,18 @@ body::before {
    ================================================================= */
 .top-nav {
   position: sticky;
-  top: 0.75rem;
+  top: 0.5rem;
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65rem 1.1rem;
+  padding: 0.65rem 1rem;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   box-shadow: var(--shadow-md);
   transition: all var(--transition-smooth);
   width: 100%;
@@ -144,11 +157,11 @@ body::before {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   text-decoration: none;
   color: var(--text-main);
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: -0.02em;
 }
 
@@ -180,11 +193,11 @@ body::before {
 
 .nav-tab {
   position: relative;
-  padding: 0.45rem 0.95rem;
+  padding: 0.45rem 0.9rem;
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   border-radius: 12px;
   transition: all var(--transition-fast);
   display: flex;
@@ -208,8 +221,9 @@ body::before {
 }
 
 .icon-btn {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
   border-radius: 12px;
   border: 1px solid var(--border-light);
   background: var(--bg-card);
@@ -228,11 +242,11 @@ body::before {
   transform: scale(1.05);
 }
 
-/* Mobile Bottom Navigation Dock (Optimized for iPhone 13 & iOS Safe Area) */
+/* Universal Mobile Bottom Dock Navigation (All Smartphones & Androids) */
 .mobile-bottom-nav {
   display: none;
   position: fixed;
-  bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
@@ -240,11 +254,11 @@ body::before {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-light);
-  padding: 0.4rem 0.5rem;
+  padding: 0.35rem 0.45rem;
   border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  width: calc(100% - 1.5rem);
-  max-width: 400px;
+  width: calc(100% - 1.25rem);
+  max-width: 420px;
   justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
@@ -263,9 +277,11 @@ body::before {
   text-decoration: none;
   font-size: 0.68rem;
   font-weight: 700;
-  padding: 0.4rem 0.65rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 20px;
   transition: all var(--transition-fast);
+  min-height: 44px;
+  justify-content: center;
 }
 
 .mobile-nav-item.active,
@@ -275,13 +291,13 @@ body::before {
 }
 
 /* =================================================================
-   HERO FOLDER SECTION (Multi-Screen Responsive)
+   HERO FOLDER SECTION (Adaptive Layout)
    ================================================================= */
 .hero-section {
-  min-height: 80vh;
+  min-height: 75vh;
   display: flex;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1.75rem 0;
   position: relative;
   width: 100%;
 }
@@ -300,7 +316,7 @@ body::before {
 /* MacOS Style Window Header */
 .folder-header-bar {
   background: linear-gradient(90deg, #E6E1D8 0%, #EDE9E0 100%);
-  padding: 0.65rem 1.1rem;
+  padding: 0.65rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -330,7 +346,7 @@ body::before {
 
 .folder-title-tag {
   font-family: var(--font-code);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.04em;
@@ -338,15 +354,15 @@ body::before {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 220px;
+  max-width: 200px;
 }
 
 /* Hero Content Grid */
 .hero-content {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 2.25rem;
-  padding: clamp(1.5rem, 4vw, 3.25rem);
+  gap: 2rem;
+  padding: clamp(1.25rem, 4vw, 3rem);
   align-items: center;
   width: 100%;
   box-sizing: border-box;
@@ -355,21 +371,21 @@ body::before {
 .hero-text-area {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
   width: 100%;
 }
 
 .hero-edition-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.85rem;
+  gap: 0.45rem;
+  padding: 0.35rem 0.8rem;
   background: rgba(29, 112, 184, 0.1);
   color: var(--bg-folder-tab);
   border: 1px solid var(--border-glow);
   border-radius: 30px;
   font-family: var(--font-code);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   width: fit-content;
 }
@@ -390,7 +406,7 @@ body::before {
 }
 
 .hero-main-title {
-  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-size: clamp(2.1rem, 5.8vw, 3.8rem);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.03em;
@@ -401,16 +417,16 @@ body::before {
 }
 
 .hero-name-subtitle {
-  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
   font-weight: 700;
   color: var(--bg-folder-tab);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .hero-tagline {
-  font-size: clamp(0.92rem, 1.4vw, 1.1rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.08rem);
   color: var(--text-muted);
   max-width: 540px;
 }
@@ -418,17 +434,17 @@ body::before {
 .hero-skill-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.3rem;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
   width: 100%;
 }
 
 .pill-item {
-  padding: 0.35rem 0.8rem;
+  padding: 0.35rem 0.75rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -439,13 +455,14 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.6rem;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
   width: 100%;
 }
 
 .btn-primary {
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.45rem;
+  min-height: 44px;
   background: linear-gradient(135deg, var(--bg-folder-tab), var(--bg-folder-dark));
   color: white;
   text-decoration: none;
@@ -459,7 +476,7 @@ body::before {
   gap: 0.5rem;
   box-shadow: 0 6px 20px rgba(29, 112, 184, 0.35);
   transition: all var(--transition-bounce);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
 .btn-primary:hover {
@@ -468,7 +485,8 @@ body::before {
 }
 
 .btn-secondary {
-  padding: 0.8rem 1.4rem;
+  padding: 0.8rem 1.35rem;
+  min-height: 44px;
   background: transparent;
   color: var(--text-main);
   border: 2px solid var(--border-light);
@@ -481,7 +499,7 @@ body::before {
   justify-content: center;
   gap: 0.5rem;
   transition: all var(--transition-fast);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
 .btn-secondary:hover {
@@ -495,7 +513,7 @@ body::before {
   position: relative;
   background: linear-gradient(145deg, #1D70B8, #0A4B82);
   border-radius: 20px;
-  padding: 1.35rem;
+  padding: 1.25rem;
   color: white;
   box-shadow: 0 15px 35px rgba(10, 75, 130, 0.3);
   transform-style: preserve-3d;
@@ -529,8 +547,8 @@ body::before {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   background: var(--accent-orange);
   border-radius: 50%;
   display: flex;
@@ -543,7 +561,7 @@ body::before {
    SECTION HEADERS & FOLDER TABS
    ================================================================= */
 .section-wrapper {
-  padding: clamp(2rem, 4vw, 4rem) 0;
+  padding: clamp(1.75rem, 4vw, 3.75rem) 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -556,11 +574,11 @@ body::before {
 }
 
 .tab-title-notch {
-  padding: 0.65rem 1.6rem;
+  padding: 0.6rem 1.5rem;
   background: var(--bg-folder-tab);
   color: white;
   font-weight: 700;
-  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   display: inline-flex;
@@ -573,27 +591,27 @@ body::before {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: 0 24px 24px 24px;
-  padding: clamp(1.25rem, 4vw, 2.75rem);
+  padding: clamp(1.1rem, 4vw, 2.5rem);
   box-shadow: var(--shadow-folder);
   width: 100%;
   box-sizing: border-box;
 }
 
 .section-heading-group {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .section-subtitle {
   font-family: var(--font-code);
   color: var(--bg-folder-tab);
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .section-main-title {
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-top: 0.2rem;
@@ -605,7 +623,7 @@ body::before {
 .profile-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(1.25rem, 4vw, 2.5rem);
+  gap: clamp(1.1rem, 4vw, 2.25rem);
   align-items: center;
   width: 100%;
 }
@@ -616,7 +634,7 @@ body::before {
   overflow: hidden;
   border: 3px solid var(--bg-folder-tab);
   box-shadow: var(--shadow-lg);
-  max-width: 420px;
+  max-width: 400px;
   margin: 0 auto;
   width: 100%;
 }
@@ -630,12 +648,12 @@ body::before {
 .profile-bio-box {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
   width: 100%;
 }
 
 .bio-paragraph {
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  font-size: clamp(0.92rem, 1.4vw, 1.02rem);
   color: var(--text-muted);
   line-height: 1.7;
 }
@@ -643,15 +661,15 @@ body::before {
 .stats-counter-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  margin-top: 0.85rem;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
   width: 100%;
 }
 
 .stat-item-box {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
-  padding: 1rem 0.65rem;
+  padding: 0.9rem 0.5rem;
   border-radius: 16px;
   text-align: center;
   transition: transform var(--transition-fast);
@@ -664,13 +682,13 @@ body::before {
 
 .stat-number {
   font-family: var(--font-code);
-  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 800;
   color: var(--bg-folder-tab);
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-muted);
   margin-top: 0.15rem;
@@ -682,7 +700,7 @@ body::before {
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.35rem;
+  gap: 1.25rem;
   width: 100%;
 }
 
@@ -690,7 +708,7 @@ body::before {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 20px;
-  padding: clamp(1.15rem, 2.5vw, 1.75rem);
+  padding: clamp(1rem, 2.5vw, 1.6rem);
   transition: all var(--transition-smooth);
   position: relative;
   overflow: hidden;
@@ -705,39 +723,39 @@ body::before {
 }
 
 .expertise-icon-wrapper {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   background: var(--bg-folder-tab);
   color: white;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .expertise-title {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
 }
 
 .expertise-desc {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--text-muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 
 .skill-bar-item {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.8rem;
 }
 
 .skill-bar-info {
   display: flex;
   justify-content: space-between;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
 
 .progress-track {
@@ -762,7 +780,7 @@ body::before {
 .experience-timeline {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.25rem;
   position: relative;
   width: 100%;
 }
@@ -771,7 +789,7 @@ body::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 24px;
+  left: 22px;
   width: 3px;
   height: 100%;
   background: var(--border-light);
@@ -779,14 +797,14 @@ body::before {
 
 .timeline-item {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.1rem;
   position: relative;
   width: 100%;
 }
 
 .timeline-node {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: var(--bg-card);
   border: 3px solid var(--bg-folder-tab);
@@ -804,7 +822,7 @@ body::before {
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 18px;
-  padding: clamp(1.1rem, 2.5vw, 1.6rem);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   transition: transform var(--transition-fast);
   width: 100%;
   box-sizing: border-box;
@@ -817,22 +835,22 @@ body::before {
 
 .timeline-year {
   font-family: var(--font-code);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--bg-folder-tab);
 }
 
 .timeline-role {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-size: clamp(1rem, 1.8vw, 1.18rem);
   font-weight: 700;
   margin: 0.2rem 0;
 }
 
 .timeline-org {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   color: var(--text-muted);
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.65rem;
 }
 
 /* =================================================================
@@ -840,10 +858,10 @@ body::before {
    ================================================================= */
 .portfolio-filter-tabs {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.75rem;
+  gap: 0.45rem;
+  margin-bottom: 1.5rem;
   overflow-x: auto;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.35rem;
   width: 100%;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
@@ -855,17 +873,20 @@ body::before {
 }
 
 .filter-btn {
-  padding: 0.55rem 1.2rem;
+  padding: 0.5rem 1.15rem;
+  min-height: 40px;
   border-radius: 30px;
   border: 1.5px solid var(--border-light);
   background: var(--bg-main);
   color: var(--text-muted);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition-fast);
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
 }
 
 .filter-btn:hover,
@@ -879,7 +900,7 @@ body::before {
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1.35rem;
   width: 100%;
 }
 
@@ -923,32 +944,32 @@ body::before {
   position: absolute;
   top: 10px;
   left: 10px;
-  padding: 0.3rem 0.75rem;
+  padding: 0.28rem 0.7rem;
   background: rgba(10, 75, 130, 0.88);
   backdrop-filter: blur(8px);
   color: white;
   border-radius: 20px;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
 }
 
 .project-card-body {
-  padding: 1.25rem;
+  padding: 1.15rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .project-card-title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
 .project-card-desc {
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
   flex-grow: 1;
 }
 
@@ -956,14 +977,14 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .tech-tag {
-  padding: 0.2rem 0.55rem;
+  padding: 0.2rem 0.5rem;
   background: rgba(29, 112, 184, 0.1);
   color: var(--bg-folder-tab);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   border-radius: 6px;
 }
@@ -973,14 +994,14 @@ body::before {
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid var(--border-light);
-  padding-top: 0.85rem;
+  padding-top: 0.75rem;
 }
 
 .btn-text-link {
   color: var(--bg-folder-tab);
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -1000,8 +1021,8 @@ body::before {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  background: rgba(13, 17, 23, 0.8);
+  height: 100dvh;
+  background: rgba(13, 17, 23, 0.82);
   backdrop-filter: blur(12px);
   z-index: 10000;
   display: flex;
@@ -1010,7 +1031,7 @@ body::before {
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-fast);
-  padding: 0.75rem;
+  padding: 0.6rem;
   box-sizing: border-box;
 }
 
@@ -1022,7 +1043,7 @@ body::before {
 .modal-folder-box {
   width: 100%;
   max-width: 800px;
-  max-height: 88vh;
+  max-height: 88dvh;
   overflow-y: auto;
   background: var(--bg-card);
   border-radius: 20px;
@@ -1038,15 +1059,15 @@ body::before {
 }
 
 .modal-body-content {
-  padding: clamp(1rem, 3vw, 2.25rem);
+  padding: clamp(0.9rem, 3vw, 2rem);
 }
 
 .modal-project-img {
   width: 100%;
-  max-height: 340px;
+  max-height: 320px;
   object-fit: cover;
   border-radius: 14px;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 /* =================================================================
@@ -1055,14 +1076,14 @@ body::before {
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(1.25rem, 4vw, 2.5rem);
+  gap: clamp(1.1rem, 4vw, 2.25rem);
   width: 100%;
 }
 
 .contact-form-box {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.95rem;
   width: 100%;
 }
 
@@ -1075,14 +1096,14 @@ body::before {
 
 .form-label {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
 }
 
 /* Set font-size: 16px to prevent iOS Safari auto-zooming on tap! */
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 0.8rem 0.95rem;
+  padding: 0.75rem 0.9rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 12px;
@@ -1103,15 +1124,15 @@ body::before {
 .contact-info-box {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1rem;
   width: 100%;
 }
 
 .info-item-card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.9rem;
+  padding: 0.95rem;
   background: var(--bg-main);
   border: 1px solid var(--border-light);
   border-radius: 16px;
@@ -1120,8 +1141,8 @@ body::before {
 }
 
 .info-icon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   background: var(--bg-folder-tab);
   color: white;
   border-radius: 12px;
@@ -1132,17 +1153,17 @@ body::before {
 }
 
 .site-footer {
-  margin-top: 3rem;
-  padding: 1.75rem 0 5.5rem 0;
+  margin-top: 2.75rem;
+  padding: 1.5rem 0 5.5rem 0;
   border-top: 1px solid var(--border-light);
   text-align: center;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   width: 100%;
 }
 
 /* =================================================================
-   ANIMATION & STRICT MOBILE BREAKPOINT RULES (iPhone 13 / iOS Focus)
+   ANIMATION & STRICT BREAKPOINT RULES FOR ALL ANDROIDS & PHONES
    ================================================================= */
 .animate-scroll {
   opacity: 0;
@@ -1182,7 +1203,7 @@ body::before {
 @media (max-width: 1024px) {
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
 
   .profile-grid {
@@ -1203,7 +1224,7 @@ body::before {
 }
 
 /* -----------------------------------------------------------------
-   BREAKPOINT 3: TABLET & ALL SMARTPHONES (<= 768px, iPhone 13)
+   BREAKPOINT 3: TABLETS & ALL SMARTPHONES (<= 768px)
    ----------------------------------------------------------------- */
 @media (max-width: 768px) {
   .mobile-bottom-nav {
@@ -1211,8 +1232,8 @@ body::before {
   }
 
   .top-nav {
-    padding: 0.55rem 0.85rem;
-    margin-top: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.35rem;
   }
 
   .nav-links {
@@ -1220,30 +1241,30 @@ body::before {
   }
 
   .folder-title-tag {
-    max-width: 150px;
+    max-width: 140px;
   }
 
   .hero-section {
     min-height: auto;
-    padding: 1rem 0;
+    padding: 0.85rem 0;
   }
 
   .stats-counter-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    gap: 0.45rem;
   }
 
   .experience-timeline::before {
-    left: 16px;
+    left: 15px;
   }
 
   .timeline-node {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
 
   .timeline-item {
-    gap: 0.85rem;
+    gap: 0.75rem;
   }
 
   .site-footer {
@@ -1252,38 +1273,39 @@ body::before {
 }
 
 /* -----------------------------------------------------------------
-   BREAKPOINT 4: STRICT IPHONE 13 & SMALL PHONES (<= 480px / 390px)
+   BREAKPOINT 4: STANDARD SMARTPHONES & ALL ANDROIDS (<= 480px)
+   (Samsung Galaxy, Xiaomi, Pixel, Oppo, Vivo, Realme, iPhone)
    ----------------------------------------------------------------- */
 @media (max-width: 480px) {
   .app-container {
-    padding: 0 0.65rem;
+    padding: 0 0.5rem;
   }
 
   .hero-content {
-    padding: 1.25rem 0.75rem;
-    gap: 1.25rem;
+    padding: 1.15rem 0.65rem;
+    gap: 1.15rem;
   }
 
   .hero-main-title {
-    font-size: 2.2rem;
+    font-size: clamp(1.95rem, 7.5vw, 2.4rem);
   }
 
   .hero-name-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 
   .hero-tagline {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
   }
 
   .section-body-card {
     border-radius: 0 16px 16px 16px;
-    padding: 1rem 0.75rem;
+    padding: 0.95rem 0.65rem;
   }
 
   .tab-title-notch {
-    padding: 0.55rem 1.1rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
   }
 
   .expertise-grid {
@@ -1302,13 +1324,13 @@ body::before {
   .hero-cta-group .btn-primary,
   .hero-cta-group .btn-secondary {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 0.9rem;
   }
 
   .info-item-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .info-item-card button,
@@ -1322,16 +1344,46 @@ body::before {
   }
 
   .modal-body-content {
-    padding: 1rem 0.75rem;
+    padding: 0.95rem 0.65rem;
   }
 
   .modal-body-content div[style*="display: flex"] {
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
 
   .modal-body-content .btn-primary,
   .modal-body-content .btn-secondary {
     width: 100%;
+  }
+}
+
+/* -----------------------------------------------------------------
+   BREAKPOINT 5: EXTRA SMALL SMARTPHONES (<= 360px)
+   ----------------------------------------------------------------- */
+@media (max-width: 360px) {
+  .app-container {
+    padding: 0 0.35rem;
+  }
+
+  .hero-main-title {
+    font-size: 1.8rem;
+  }
+
+  .folder-title-tag {
+    max-width: 110px;
+  }
+
+  .pill-item {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
   }
 }
